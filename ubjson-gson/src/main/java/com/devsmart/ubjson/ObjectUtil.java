@@ -55,7 +55,7 @@ public class ObjectUtil {
             }
             return UBValueFactory.createArray(ubArray);
         } else if(element instanceof Map ) {
-            Map<Object,Object> jsonObject = (Map)element;
+            Map<Object,Object> jsonObject = (Map<Object,Object>)element;
             UBObject retval = UBValueFactory.createObject();
             for(Map.Entry<Object,Object> entry : jsonObject.entrySet()) {
                 retval.put(entry.getKey().toString(), toUBValue(entry.getValue()));
@@ -66,5 +66,34 @@ public class ObjectUtil {
         }
 
         return null;
+    }
+
+    public static Object toObject( UBValue value ){
+        if ( value.isNull() ) return null;
+        if ( value.isString() ) return value.asString();
+        if ( value.isInteger() ) return value.asInt();
+        if ( value.isChar() ) return value.asChar();
+        if ( value.isFloat() ) return value.asFloat64();
+        if ( value.isBool() ) return value.asBool();
+        // now we find the composite types
+        if ( value.isArray() ){
+            UBArray arr = value.asArray();
+            final int size = arr.size();
+            List<Object> l = new ArrayList<>(size);
+            for ( int i=0; i < size; i++){
+                Object inner = toObject(arr.get(i));
+                l.add(inner);
+            }
+            return l;
+        }
+        if ( value.isObject()){
+            UBObject obj = value.asObject();
+            Map<String,Object> map = new LinkedHashMap<>();
+            for(Map.Entry<String,UBValue> entry : obj.entrySet()) {
+                map.put(entry.getKey(), toObject(entry.getValue()));
+            }
+            return map;
+        }
+        throw new RuntimeException("unknown JSON Type element: " + value);
     }
 }

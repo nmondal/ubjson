@@ -75,5 +75,11 @@ public class JavaNativeTest {
         assertEquals((Double) list.get(3), result.get(3).asFloat64(), 0.0000001);
         assertEquals(list.get(4), result.get(4).asBool());
         assertEquals(list.get(5), result.get(5).asString());
+        Object back = ObjectUtil.toObject(value);
+        assertTrue( back instanceof  List);
+        final List<?> bL = (List<?>)back;
+        for ( int i=0; i < list.size(); i++ ){
+            assertEquals(list.get(i), bL.get(i));
+        }
     }
 }
