@@ -1,6 +1,9 @@
 package com.devsmart.ubjson;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 public class UBArray extends UBValue {
 
     private static final long serialVersionUID = 5220038976009456175L;
@@ -19,11 +22,14 @@ public class UBArray extends UBValue {
     private UBValue[] mValue;
 
     UBArray() {
-
     }
 
     UBArray(UBValue[] value) {
         mValue = value;
+    }
+
+    public List<UBValue> asList(){
+        return Arrays.asList(mValue);
     }
 
     @Override
