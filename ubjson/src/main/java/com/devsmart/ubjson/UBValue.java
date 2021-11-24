@@ -80,6 +80,16 @@ public abstract class UBValue implements Comparable<UBValue>, Serializable {
         }
     }
 
+    public boolean isFloat() {
+        switch (getType()){
+            case Float32:
+            case Float64:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     public boolean isInteger() {
         switch (getType()){
             case Int8:

@@ -42,7 +42,19 @@ public class JavaNativeTest {
         UBValue value = ObjectUtil.toUBValue(intValue);
         assertNotNull(value);
         assertTrue(value.isNumber());
+        assertFalse(value.isFloat());
         assertTrue(value.isInteger());
         assertEquals(intValue, value.asInt());
+    }
+
+    @Test
+    public void testConvertDouble() {
+        final double fValue = 42.0;
+        UBValue value = ObjectUtil.toUBValue(fValue);
+        assertNotNull(value);
+        assertTrue(value.isNumber());
+        assertFalse(value.isInteger());
+        assertTrue(value.isFloat());
+        assertEquals(fValue, value.asInt(), 0.000001 );
     }
 }
