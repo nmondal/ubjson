@@ -7,6 +7,7 @@ public class ObjectUtil {
 
     public static boolean isPrimitive( Object o){
         return o.getClass().isPrimitive() ||
+                o instanceof Boolean || o instanceof Number ||
                 o instanceof CharSequence ;
     }
 
