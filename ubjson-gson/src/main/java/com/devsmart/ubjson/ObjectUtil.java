@@ -3,6 +3,7 @@ package com.devsmart.ubjson;
 import java.lang.reflect.Array;
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public class ObjectUtil {
 
     public static boolean isPrimitive( Object o){
