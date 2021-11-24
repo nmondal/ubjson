@@ -1,9 +1,12 @@
 package com.devsmart.ubjson;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -80,6 +83,30 @@ public class JavaNativeTest {
         final List<?> bL = (List<?>)back;
         for ( int i=0; i < list.size(); i++ ){
             assertEquals(list.get(i), bL.get(i));
+        }
+    }
+
+    @Test
+    public void testConvertMap() {
+        final Map<String,Object> map = new HashMap<String, Object>() {{
+            put("i", 0);
+            put("d", 42.0d);
+            put("b", false);
+            put("s", "Hello, World!");
+            put("n", null);
+        }};
+        UBValue value = ObjectUtil.toUBValue(map);
+        assertNotNull(value);
+        Object back = ObjectUtil.toObject(value);
+        assertNotNull(back);
+        assertTrue( back instanceof  Map);
+        final Map<String,Object> bM = (Map<String,Object>)back;
+        assertEquals(map.size(), bM.size());
+        for ( String key : map.keySet() ){
+            assertTrue(bM.containsKey(key));
+            Object o = map.get(key);
+            Object a = bM.get(key);
+            assertEquals(o, a);
         }
     }
 }
