@@ -1,20 +1,21 @@
 
 apply plugin: 'java'
-apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'maven-publish'
 
 
 dependencies {
-    compile project(':ubjson')
-    compile 'com.google.code.gson:gson:2.8.1'
-    testCompile 'junit:junit:4.11'
+    implementation project(':ubjson')
+    implementation 'com.google.code.gson:gson:2.8.9'
+    testImplementation 'junit:junit:4.13.2'
 
 }
 
 compileJava {
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
+/*
 modifyPom {
     project {
         name 'ubjson-gson'
@@ -43,3 +44,4 @@ modifyPom {
         }
     }
 }
+ */

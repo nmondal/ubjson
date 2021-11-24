@@ -1,17 +1,19 @@
 
 apply plugin: 'java'
-apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'maven-publish'
+
 
 dependencies {
-  testCompile 'junit:junit:4.11'
+  testImplementation 'junit:junit:4.13.2'
 
 }
 
 compileJava {
-  sourceCompatibility = 1.6
-  targetCompatibility = 1.6
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
 }
 
+/*
 modifyPom {
   project {
     name 'ubjson'
@@ -40,3 +42,5 @@ modifyPom {
     }
   }
 }
+
+ */
